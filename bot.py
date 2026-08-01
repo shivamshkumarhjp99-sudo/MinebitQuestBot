@@ -8,19 +8,18 @@ from telegram.ext import (
 )
 
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from dotenv import load_dotenv
 from storage_helper import load_quests
-from zoneinfo import ZoneInfo
 
 import os
 
 load_dotenv()
 
 BOT_TOKEN = os.getenv("BOT_TOKEN", "").strip()
+
 if not BOT_TOKEN:
     raise ValueError("BOT_TOKEN environment variable is missing.")
-
-
 # ================= START =================
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -54,7 +53,6 @@ Choose an option below 👇""",
 async def status_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     try:
-
         quests = load_quests()
 
         text = f"""🟢 Minebit Quest Bot
@@ -66,7 +64,7 @@ async def status_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
 📋 Current Quests : {len(quests)}
 
 🕒 Last Updated
-datetime.now(ZoneInfo("Asia/Kolkata")).strftime("%d %b %Y | %I:%M:%S %p")
+{datetime.now(ZoneInfo("Asia/Kolkata")).strftime("%d %b %Y | %I:%M:%S %p")}
 """
 
     except Exception as e:
@@ -77,8 +75,6 @@ datetime.now(ZoneInfo("Asia/Kolkata")).strftime("%d %b %Y | %I:%M:%S %p")
 """
 
     await update.message.reply_text(text)
-
-
 # ================= QUESTS =================
 
 async def quests_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -123,7 +119,7 @@ f"""✅ Database Loaded Successfully
 📋 Current Quests : {len(quests)}
 
 🕒 Checked At
-{datetime.now().strftime("%d %b %Y | %I:%M:%S %p")}
+{datetime.now(ZoneInfo("Asia/Kolkata")).strftime("%d %b %Y | %I:%M:%S %p")}
 
 ⚡ Response Time : Instant
 """
@@ -132,8 +128,7 @@ f"""✅ Database Loaded Successfully
     except Exception as e:
 
         await msg.edit_text(f"❌ Error\n\n{e}")
-
-
+        
 # ================= HELP =================
 
 async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
