@@ -1,15 +1,31 @@
+import os
 import requests
-from config import BOT_TOKEN, CHAT_ID
+from dotenv import load_dotenv
 
-def send_message(text):
+load_dotenv()
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+CHAT_IDS = os.getenv("CHAT_IDS", "").split(",")
+
+
+def send_message(message):
+
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 
-    data = {
-        "chat_id": CHAT_ID,
-        "text": text
-    }
+    for chat_id in CHAT_IDS:
 
-    response = requests.post(url, json=data)
+        chat_id = chat_id.strip()
 
-    print("Status:", response.status_code)
-    print("Response:", response.text)
+        if not chat_id:
+            continue
+
+        payload = {
+            "chat_id": chat_id,
+            "text": message
+        }
+
+        response = requests.post(url, data=payload)
+
+        print(f"Sent to {chat_id}")
+        print("Status:", response.status_code)
+        print("Response:", response.text)
