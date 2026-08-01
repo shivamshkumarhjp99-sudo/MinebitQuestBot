@@ -10,6 +10,7 @@ from telegram.ext import (
 from datetime import datetime
 from dotenv import load_dotenv
 from storage_helper import load_quests
+from zoneinfo import ZoneInfo
 
 import os
 
@@ -65,7 +66,7 @@ async def status_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
 📋 Current Quests : {len(quests)}
 
 🕒 Last Updated
-{datetime.now().strftime("%d %b %Y | %I:%M:%S %p")}
+datetime.now(ZoneInfo("Asia/Kolkata")).strftime("%d %b %Y | %I:%M:%S %p")
 """
 
     except Exception as e:
