@@ -15,7 +15,9 @@ import os
 
 load_dotenv()
 
-BOT_TOKEN = os.getenv("BOT_TOKEN")
+BOT_TOKEN = os.getenv("BOT_TOKEN", "").strip()
+if not BOT_TOKEN:
+    raise ValueError("BOT_TOKEN environment variable is missing.")
 
 
 # ================= START =================
