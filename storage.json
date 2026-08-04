@@ -4,12 +4,12 @@
         "xp": 250
     },
     {
-        "name": "Tweet about Minebit",
-        "xp": 400
-    },
-    {
         "name": "Join the MineBit Discord",
         "xp": 300
+    },
+    {
+        "name": "Tweet about Minebit",
+        "xp": 400
     },
     {
         "name": "Follow us on Kick",
@@ -21,6 +21,10 @@
     },
     {
         "name": "🔔 Turn On X Notifications",
+        "xp": 300
+    },
+    {
+        "name": "Subscribe to our YouTube Channel",
         "xp": 300
     },
     {
